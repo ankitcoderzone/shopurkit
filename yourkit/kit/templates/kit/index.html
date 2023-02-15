@@ -10,45 +10,75 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="/">urKIT</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- {% if request.user.is_authenticated %} -->
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            Dropdown
+                            Products
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
+                            <li><a class="dropdown-item" href="#">Cookies</a></li>
+                            <li><a class="dropdown-item" href="#">Chocolates</a></li>
+                            <li><a class="dropdown-item" href="#">Breakfast & instant food</a>
                             </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#">Snacks & Munchies</a></li>
+                            <li><a class="dropdown-item" href="#">Kitchen</a></li>
+                            <li><a class="dropdown-item" href="#">Cold Drink</a></li>
+                            <li><a class="dropdown-item" href="#">Dairy & Bread</a></li>
+                            <li><a class="dropdown-item" href="#">Sauces & Spreads</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Store
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Belaisa Store</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
+                        <a class="nav-link text-white" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/admin">Admin</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex" role="search" action="/search">
+                    <input class="form-control me-2" type="search" placeholder="Search" name="search"
+                        aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
+            <!-- {% else %} -->
+            <li class="nav-item mx-2">
+                <a href="#" class="nav-link text-white">Login</a>
+            </li>
+            <li class="nav-item mx-2">
+                <a href="#" class="nav-link text-white">Registration</a>
+            </li>
+            <li class="nav-item mx-2">
+                <a href="#" class="nav-link text-white">Admin</a>
+            </li>
+            <!-- {% endif %} -->
+            </ul>
         </div>
     </nav>
 
