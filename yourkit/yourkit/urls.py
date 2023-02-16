@@ -19,9 +19,9 @@ from kit import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('/about', views.about, name='about'),
+    # path('', views.home, name='home'),
+    # path('/about', views.about, name='about'),
 
 
-    path('kit/', include('kit.urls'))
+    path('', include('kit.urls'))
 ]

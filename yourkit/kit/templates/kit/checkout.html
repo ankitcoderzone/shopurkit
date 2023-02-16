@@ -1,0 +1,108 @@
+{% extends 'kit/base.html' %}
+{% load static %}
+{% block title %}urKIT | Checkout{% endblock title %}
+
+{% block main-content %}
+<div class="container">
+    {% if messages %}
+    {% for msg in messages %}
+    <div class="alert alert-danger" role="alert">
+        {{msg}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="row mt-5">
+        <div class="col-sm-6">
+            <a class="btn btn-outline-dark" href="{% url 'showcart' %}">&#x2190; Back to Cart</a>
+            <hr>
+            <h4 class="text-center">Order Summery</h4>
+            <hr>
+            {% for item in cart_items %}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5>Product: {{item.product.title}}</h5>
+                    <p>Quantity: {{item.quantity}}</p>
+                    <p class="fw-bold">Price: {{item.product.discounted_price}}</p>
+                </div>
+            </div>
+            {% endfor %}
+            <p class="fw-bold">Total Cost + Rs. 00 = {{totalamount}}</p>
+            <small><strong>Alert! </strong>If you want to make online payment pay at the time of product delivery.
+            </small>
+        </div>
+        <div class="col-sm-4 offset-sm-1">
+            <h4 class="text-center">Shipping Address</h4>
+            <hr>
+            <form action="{% url 'cod_payment' %}" method="post" id="myform">
+                {% csrf_token %}
+                {% for ad in add %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5>{{ad.name}}</h5>
+                        <p>Mobile: {{ad.mobile}}</p>
+                        <p>{{ad.locality}} {{ad.city}} {{ad.area}} {{ad.zipcode}}</p>
+                    </div>
+                </div>
+                <div class="form-check mt-2 mb-5">
+                    <input class="form-check-input" type="radio" name="custid" id="custadd{{forloop.counter}}"
+                        value="ad.id">
+                    <label class="form-check-label fw-bold" for="custadd{{forllop.counter}}">
+                        Address:{{forloop.counter}}
+                    </label>
+                </div>
+                {% endfor %}
+                <div class="form-check mb-3">
+                    <label for="totalamount" class="form-label">Total Amount</label>
+                    <input type="number" class="form-control" name="totalamont" value="{{totalamount}}" readonly>
+                </div>
+
+                <div class="text-end">
+                    <button id="rzp-button1" type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Place
+                        Order</button>
+                </div>
+            </form>
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock main-content %}
+{% block payment-gateway %}
+<script type="text/javascript">
+    function submitCodPayment() {
+        const paymentForm = document.getElementById('myform');
+        const paymentData = {
+            custid: myform.elements.custid.value,
+            totalamount: myform.elements.totalamount.value,
+
+        };
+        var url = '/cod-payment/'
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+
+            },
+            body: JSON.stringify(paymentData)
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('failed')
+                }
+            })
+            .then(data => {
+                alert("Payment submitted successfully")
+                myform.reset();
+            })
+
+    }
+</script>
+{% endblock payment-gateway %}

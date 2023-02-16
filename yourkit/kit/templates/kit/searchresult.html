@@ -1,0 +1,12 @@
+{% extends 'kit/base.html' %}
+{% load static %}
+{% block title %}urKIT | Search{% endblock title %}
+
+{% block main-content %}
+<div class="d-flex justify-content-center" style="margin-top: 300px;">
+    <form class="searchBox" role="search" action="/search">
+        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+</div>
+{% endblock main-content %}
