@@ -27,7 +27,7 @@ class OrderPlacedModelAdmin(admin.ModelAdmin):
     #     link=reverse('admin:app_customer_change',args=[obj.customer.pk])
     #     return format_html('<a href="{}">{}</a>',link,obj.customer.name)
     def products(self,obj):
-        link=reverse('admin:app_product_change',args=[obj.product.pk])
+        link=reverse('admin:kit_product_change',args=[obj.product.pk])
         return format_html('<a href="{}">{}</a>',link,obj.product.title)
     # def users(self,obj):
     #     link=reverse('admin:app_user_change',args=[obj.user.pk])
