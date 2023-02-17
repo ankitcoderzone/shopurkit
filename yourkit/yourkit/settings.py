@@ -30,7 +30,7 @@ environ.Env.read_env()
 SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG ='RENDER' not in os.environ
 
 ALLOWED_HOSTS = ['www.urkit.in']
 
@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'yourkit.wsgi.application'
 
 import dj_database_url
 DATABASES = {
-    'default': dj_database_url.parse(env('DATABASE_URL'))
+    'default': dj_database_url.parse(env('DATABASE_URL'),conn_max_age=600)
 }
 
 
