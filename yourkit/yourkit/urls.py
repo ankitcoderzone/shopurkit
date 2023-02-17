@@ -23,5 +23,5 @@ urlpatterns = [
     # path('/about', views.about, name='about'),
 
 
-    path('', include('kit.urls'))
+    path('blog/', include('kit.urls'))
 ]
