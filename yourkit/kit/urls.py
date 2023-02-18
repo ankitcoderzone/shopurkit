@@ -5,6 +5,9 @@ from . import views
 from django.contrib.auth import views as auth_view
 from . forms import LoginForm, MyPasswordResetForm, MyPasswordChangeForm, MySetPasswordForm
 
+
+
+
 urlpatterns = [
     
     path('', views.home, name='home'),
