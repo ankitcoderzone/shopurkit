@@ -34,3 +34,8 @@ class OrderPlacedModelAdmin(admin.ModelAdmin):
     #     return format_html('<a href="{}">{}</a>',link,obj.user.name)
 
 # Register your models here.
+
+
+admin.site.site_header = "Login to urKIT"
+admin.site.site_title = "Welcome to urKIT Dashboard"
+admin.site.site_header = "urKIT Portal"
