@@ -38,4 +38,4 @@ class OrderPlacedModelAdmin(admin.ModelAdmin):
 
 admin.site.site_header = "Login to urKIT"
 admin.site.site_title = "Welcome to urKIT Dashboard"
-admin.site.site_header = "urKIT Portal"
+admin.site.index_title = "urKIT Portal"
