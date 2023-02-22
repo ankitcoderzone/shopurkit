@@ -1,10 +1,10 @@
 # from django.shortcuts import render
-from django.http import HttpResponseRedirect
+# from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 # from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.views import View
-from . models import Product, Customer, Cart, OrderPlaced, Payment
+from . models import Product, Cart, OrderPlaced, Customer
 from . forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from django.db.models import Q
@@ -56,7 +56,6 @@ class ProductDetail(View):
         if request.user.is_authenticated:
             totalitem = len(Cart.objects.filter(user=request.user))
         return render(request, 'kit/productdetail.html', locals())
-
 
 class CustomerRegistrationView(View):
     def get(self,request):
