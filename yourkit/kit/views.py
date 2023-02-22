@@ -1,11 +1,11 @@
 # from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
-from django.db.models import Count
+#from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.views import View
-from . models import *
-from . forms import *
+from . models import Product, Cart, OrderPlaced, Customer
+from . forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from django.db.models import Q
 
@@ -17,18 +17,18 @@ def home(request):
     totalitem = 0
     if request.user.is_authenticated :
         totalitem = len(Cart.objects.filter(user=request.user))
-    return render(request, 'kit/home.html', {})
+    return render(request, 'kit/home.html', locals())
 
 def about(request):
     totalitem = 0
     if request.user.is_authenticated :
         totalitem = len(Cart.objects.filter(user=request.user))
-    return render(request, 'kit/about.html', {})
+    return render(request, 'kit/about.html', locals())
 def contact(request):
     totalitem = 0
     if request.user.is_authenticated :
         totalitem = len(Cart.objects.filter(user=request.user))
-    return render(request, 'kit/contact.html', {})
+    return render(request, 'kit/contact.html', locals())
 
 
 class CategoryView(View):
@@ -38,7 +38,7 @@ class CategoryView(View):
             totalitem = len(Cart.objects.filter(user=request.user))
         product = Product.objects.filter(category=val)
         title = Product.objects.filter(category=val).values('title')
-        return render(request, "kit/category.html", {})
+        return render(request, "kit/category.html", locals())
 
 class CategoryTitle(View):
     def get(self,request,val):
@@ -47,7 +47,7 @@ class CategoryTitle(View):
         if request.user.is_authenticated:
             totalitem = len(Cart.objects.filter(user=request.user))
         title = Product.objects.filter(category=product[0].category).values('title')
-        return render(request, "kit/category.html", {})
+        return render(request, "kit/category.html", locals())
 
 class ProductDetail(View):
     def get(self,request,pk):
@@ -55,12 +55,12 @@ class ProductDetail(View):
         totalitem = 0
         if request.user.is_authenticated:
             totalitem = len(Cart.objects.filter(user=request.user))
-        return render(request, 'kit/productdetail.html', {})
+        return render(request, 'kit/productdetail.html', locals())
 
 class CustomerRegistrationView(View):
     def get(self,request):
         form = CustomerRegistrationForm()
-        return render(request, 'kit/customerresgistration.html', {})
+        return render(request, 'kit/customerresgistration.html', locals())
 
     def post(self,request):
         form = CustomerRegistrationForm(request.POST)
@@ -70,7 +70,7 @@ class CustomerRegistrationView(View):
 
         else:
             messages.warning(request, "Invalid Input Data")
-        return render(request, 'kit/customerresgistration.html', {})
+        return render(request, 'kit/customerresgistration.html', locals())
 
 class ProfileView(View):
     def get(self,request):
@@ -78,7 +78,7 @@ class ProfileView(View):
         totalitem = 0
         if request.user.is_authenticated:
             totalitem = len(Cart.objects.filter(user=request.user))
-        return render(request, 'kit/profile.html', {})
+        return render(request, 'kit/profile.html', locals())
     def post(self,request):
    
         form = CustomerProfileForm(request.POST)
@@ -105,7 +105,7 @@ def address(request):
     totalitem = 0
     if request.user.is_authenticated:
         totalitem = len(Cart.objects.filter(user=request.user))
-    return render(request, 'kit/address.html', {})
+    return render(request, 'kit/address.html', locals())
 
 class updateAddress(View):
     def get(self,request,pk):
@@ -114,7 +114,7 @@ class updateAddress(View):
         totalitem = 0
         if request.user.is_authenticated:
             totalitem = len(Cart.objects.filter(user=request.user))
-        return render(request, 'kit/updateaddress.html', {})
+        return render(request, 'kit/updateaddress.html', locals())
 
     def post(self,request,pk):
         form = CustomerProfileForm(request.POST)
@@ -159,7 +159,7 @@ def show_cart(request):
         totalitem = len(Cart.objects.filter(user=request.user))
     else:
         return redirect("/accounts/login")
-    return render(request, 'kit/addtocart.html', {})
+    return render(request, 'kit/addtocart.html', locals())
 
 class checkout(View):
     def get(self,request):
@@ -180,12 +180,12 @@ class checkout(View):
 
         )
         p.save()
-        return render(request, 'kit/checkout.html', {})
+        return render(request, 'kit/checkout.html', locals())
 
 def cod_payment(request):
     if request.method == 'POST':
-        order_id = request.POST.get('order_id')
-        amount = request.POST.get('amount')
+        #order_id = request.POST.get('order_id')
+        #amount = request.POST.get('amount')
         # cust_id = request.POST.get('cust_id')
 
         user=request.user
@@ -206,7 +206,7 @@ def orders(request):
     totalitem = 0
     if request.user.is_authenticated :
         totalitem = len(Cart.objects.filter(user=request.user))
-    return render(request, 'kit/orders.html', {})
+    return render(request, 'kit/orders.html', locals())
 
 def plus_cart(request):
     if request.method == 'GET':
@@ -279,11 +279,11 @@ def search(request):
     if request.user.is_authenticated :
         totalitem = len(Cart.objects.filter(user=request.user))
     product = Product.objects.filter(Q(title__icontains=query))
-    return render(request, 'kit/search.html', {})
+    return render(request, 'kit/search.html', locals())
 
 def searchresult(request):
     if request.user.is_authenticated :
         totalitem = len(Cart.objects.filter(user=request.user))
-    return render(request, 'kit/searchresult.html', {})
+    return render(request, 'kit/searchresult.html', locals())
 
 
