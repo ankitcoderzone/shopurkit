@@ -34,7 +34,7 @@ class Product(models.Model):
     prodapp = models.TextField(default='')
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
     
-    product_image = models.FileField(upload_to='kit/images', default='')
+    product_image = models.FileField(upload_to='products', default='')
     def __str__(self):
         return self.title
 
