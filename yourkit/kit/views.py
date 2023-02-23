@@ -4,7 +4,7 @@ from django.http import JsonResponse
 # from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.views import View
-from . models import Product, Cart, OrderPlaced, Customer
+from . models import Product, Cart, OrderPlaced, Customer, Payment
 from . forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from django.db.models import Q
